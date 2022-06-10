@@ -9,10 +9,9 @@
 
     //Cálculo del costo por hora
     switch (costo) {
-
         //Conoce el costo por hora = ingreso del costo
         case "1":
-            let ingresoCosto = prompt ("Ingresá tu costo por hora");
+            let ingresoCosto = prompt ("Ingresá tu costo por hora")
             console.log ("El costo ingresado es: " + "$" +  ingresoCosto + ", para el proyecto: " + nomProyecto);
             break;
 
@@ -34,4 +33,36 @@
             break;
     }
 
+//Condicional: selección de "ingresoCosto" o "costoHora"
+/* function elegirVariable (costoIngr, costoCalc) {
 
+    if (costoIngr !="") {
+        console.log (costoIngr);
+    } else console.log (costoCalc);
+
+} 
+console.log (elegirVariable (ingresoCosto, costoHora)); */
+
+
+//Función constructora: proyecto
+function proyecto (nombre, tiempoTrabajado, costoxHora, costoTotal) {
+    this.nombre = nombre;
+    this.tiempoTrabajado = tiempoTrabajado;
+    this.costoxHora = costoxHora;
+    this.costoTotal = costoTotal;
+}
+
+//Nuevos proyectos
+const proyecto1 = new proyecto (nomProyecto, "10hs", "$500", "$1000")
+console.log (proyecto1)
+
+    //Agregar dato a nuevo proyecto
+    let descripcion = "Esto es una descripción"
+    proyecto1.descripcion = descripcion
+    console.log (proyecto1)
+
+const proyecto2 = [nomProyecto, "10hs", "$500", "$1000"]
+console.log (proyecto2)
+
+    //Agregar dato nuevo
+    proyecto2.push (descripcion)
