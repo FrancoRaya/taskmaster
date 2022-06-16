@@ -21,9 +21,37 @@
     </header>
 
     <section>
-        <p>
-            0:00:0
-        </p>
+        <h2 id="cronometro" class="cronometro">00:00:00</h2>
+
+        <div class="buttons">
+            <button id="start"> Start </button>
+            <button id="pausa"> Pause </button>
+            <button id="reset"> Reset </button>
+        </div>
+
+        <input type="submit" id="sumar" value="Sumar tiempo">
+    </section>
+
+    <section>
+        <div class="agregarProyecto">
+            <h4>
+                Agregar Proyecto
+            </h4>
+            <input type="text" id="agregarProyecto">
+            <input type="button"id="botonProyecto" value="Agregar">
+        </div>
+
+        <div class="agregarCostohora">
+            <h4>
+                Agregar tu Costo x Hora
+            </h4>
+            <p>
+                Si no conocés tu costo por hora, podés calcularlo haciendo click <a href="#">aquí</a>
+            </p>
+            
+            <input type="text" id="agregarCosto">
+            <input type="button" value="agregar" id="botonCosto">
+        </div>
     </section>
 
     <section>
@@ -36,7 +64,7 @@
             </h4>
 
             <div>
-                Task
+                <p id="nomProyecto"></p>
             </div>
         </div>
 
@@ -62,6 +90,16 @@
 
         <div>
             <h4>
+                Costo x hora
+            </h4>
+
+            <div>
+                <p id="costoHora"></p>
+            </div>
+        </div>
+
+        <div>
+            <h4>
                 Costo total
             </h4>
 
@@ -76,22 +114,20 @@
             -
         </p>
 
-        <div>
-            <i class="bi bi-play-fill" style="font-size: 2em;"></i>
-            <i class="bi bi-pause" style="font-size: 2em;"></i>
-        </div>
     </section>
+
 
     <section>
-        <p>
-            Si no sabés tu precio/costo por hora, hacé click en este link
-        </p>
+        <div>
+            <p>Ingresá tu salario/honorarios mensual pretendido (sin el signo $)</p>
+            <input type="number" id="agregarSalario">
+            <input type="submit" value="Agregar" id="botonSalario">
+        </div>
 
-        <button>
-            <a href="">Calcular mi precio x hora</a>
-        </button>
+        <div>
+            <p id="costoHoraCalculado"></p>
+        </div>
     </section>
-
 
     <!-- JS -->
     <script src="./js/main.js"></script>

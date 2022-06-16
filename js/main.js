@@ -1,68 +1,76 @@
+//Cronómetro
+const start = document.getElementById('start');
+const pause = document.getElementById('pause');
+const reset = document.getElementById('reset');
+
+
 //Ingreso de datos
     //Nombre del proyecto
-    let nomProyecto = prompt ("Ingresá el nombre del proyecto que querés trackear");
-    console.log (nomProyecto);
+    const agregarProyecto = document.querySelector("#agregarProyecto");
+    const botonProyecto = document.querySelector("#botonProyecto");
+    const nomProyecto = document.querySelector("#nomProyecto");
+
+    botonProyecto.addEventListener ("click", () => {
+            nomProyecto.innerText = agregarProyecto.value;
+        });
+    
 
     //Costo por hora
-    let costo = prompt ("Ahora, definamos tu costo por hora. Ingresá una de las siguientes opciones: \n 1- Conozco mi costo por hora \n 2- No conozco mi costo por hora");
-    console.log (costo);
+    const agregarCosto = document.getElementById('agregarCosto');
+    const botonCosto = document.getElementById('botonCosto');
+    const costoHora = document.getElementById('costoHora');
 
-    //Cálculo del costo por hora
-    switch (costo) {
-        //Conoce el costo por hora = ingreso del costo
-        case "1":
-            let ingresoCosto = prompt ("Ingresá tu costo por hora")
-            console.log ("El costo ingresado es: " + "$" +  ingresoCosto + ", para el proyecto: " + nomProyecto);
-            break;
+    botonCosto.addEventListener ("click", () => {
+        costoHora.innerText = "$" + agregarCosto.value;
+    });
 
-        //NO conoce el costo por hora = cálculo del costo
-        case "2":
-            let calculoCosto = parseInt (prompt ("Ingresá tu sueldo/honorarios pretendido MENSUAL aproximado tomando como referencia una jornada laboral de 8hs."));
 
-            //Sueldo pretendido mensual / días laborables = costo diario
-            let costoDiario = calculoCosto / 22;
-            console.log ("El costo diario es: " + "$" + costoDiario);
 
-            //Costo diario / jornada la boral estandar = costo por hora
-            let costoHora = costoDiario / 8;
-            console.log ("El costo por hora es: " + "$" +  costoHora + ", para el proyecto: " + nomProyecto);
-            break;
-    
-        default:
-            alert ("Opción no válida");
-            break;
-    }
+//Costo por hora calculado
+const agregarSalario = document.getElementById('agregarSalario');
+const botonSalario = document.getElementById('botonSalario');
+const costoHoraCalculado = document.getElementById('costoHoraCalculado');
 
-//Condicional: selección de "ingresoCosto" o "costoHora"
-/* function elegirVariable (costoIngr, costoCalc) {
+botonSalario.addEventListener ("click", () => {
+    costoHoraCalculado.innerText = calculoCostoHora ();
+});
 
-    if (costoIngr !="") {
-        console.log (costoIngr);
-    } else console.log (costoCalc);
+function calculoCostoHora () {
+    //Sueldo pretendido mensual / días laborables = costo diario
+    let costoDiario = agregarSalario / 22;
 
-} 
-console.log (elegirVariable (ingresoCosto, costoHora)); */
+    //Costo diario / jornada la boral estandar = costo por hora
+    let costoxHora = costoDiario / 8;
+
+    console.log ("El costo por hora es: " + "$" +  costoxHora);
+}
+
 
 
 //Función constructora: proyecto
-function proyecto (nombre, tiempoTrabajado, costoxHora, costoTotal) {
+function proyecto (nombre, tiempoTrabajado, costoxHora, costoProyecto) {
     this.nombre = nombre;
     this.tiempoTrabajado = tiempoTrabajado;
     this.costoxHora = costoxHora;
-    this.costoTotal = costoTotal;
+    this.costoProyecto = costoProyecto;
 }
 
 //Nuevos proyectos
-const proyecto1 = new proyecto (nomProyecto, "10hs", "$500", "$1000")
-console.log (proyecto1)
+const proyecto1 = new proyecto ("Nombre del Proyecto", "10hs", "$500", "$1000");
+console.log (proyecto1);
 
     //Agregar dato a nuevo proyecto
-    let descripcion = "Esto es una descripción"
-    proyecto1.descripcion = descripcion
-    console.log (proyecto1)
+    let descripcion = "Esto es una descripción";
+    proyecto1.descripcion = descripcion;
+    console.log (proyecto1);
 
-const proyecto2 = [nomProyecto, "10hs", "$500", "$1000"]
-console.log (proyecto2)
+const proyecto2 = ["Nombre del Proyecto", "10hs", "$500", "$1000"];
+console.log (proyecto2);
 
     //Agregar dato nuevo
-    proyecto2.push (descripcion)
+    proyecto2.push (descripcion);
+
+
+//Cálculo costo total del proyecto
+const costoTotal = 10 * costoHora;
+console.log = ("El costo Total del proyecto es: " + "$" + costoTotal);
