@@ -10,8 +10,12 @@ const reset = document.getElementById('reset');
     const botonProyecto = document.querySelector("#botonProyecto");
     const nomProyecto = document.querySelector("#nomProyecto");
 
-    botonProyecto.addEventListener ("click", () => {
-            nomProyecto.innerText = agregarProyecto.value;
+        //Agregar un nombre de proyecto nuevo
+        botonProyecto.addEventListener ("click", () => {
+
+            let proyectoAgr = document.createElement ("p");
+            proyectoAgr.innerHTML = agregarProyecto.value;
+            nomProyecto.append (proyectoAgr);
         });
     
 
@@ -20,10 +24,13 @@ const reset = document.getElementById('reset');
     const botonCosto = document.getElementById('botonCosto');
     const costoHora = document.getElementById('costoHora');
 
-    botonCosto.addEventListener ("click", () => {
-        costoHora.innerText = "$" + agregarCosto.value;
-    });
+        //Agregar costo x hora nuevo
+        botonCosto.addEventListener ("click", () => {
 
+            let costoAgr = document.createElement ("p");
+            costoAgr.innerHTML = "$" + agregarCosto.value;
+            costoHora.append (costoAgr);
+        });
 
 
 //Costo por hora calculado
@@ -31,19 +38,21 @@ const agregarSalario = document.getElementById('agregarSalario');
 const botonSalario = document.getElementById('botonSalario');
 const costoHoraCalculado = document.getElementById('costoHoraCalculado');
 
-botonSalario.addEventListener ("click", () => {
-    costoHoraCalculado.innerText = calculoCostoHora ();
-});
+    //Cálculo
+    botonSalario.addEventListener ("click", () => {
+        
+        //Sueldo pretendido mensual / días laborables = costo diario
+        let costoDiario = agregarSalario.value / 22;
+        console.log = (costoDiario)
 
-function calculoCostoHora () {
-    //Sueldo pretendido mensual / días laborables = costo diario
-    let costoDiario = agregarSalario / 22;
+        //Costo diario / jornada la boral estandar = costo por hora
+        let costoxHora = costoDiario / 8;
+        console.log = ("El costo por hora es: " + "$" +  costoxHora);
 
-    //Costo diario / jornada la boral estandar = costo por hora
-    let costoxHora = costoDiario / 8;
+        costoHoraCalculado.innerText = costoxHora;
+    });
 
-    console.log ("El costo por hora es: " + "$" +  costoxHora);
-}
+
 
 
 
