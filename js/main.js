@@ -32,6 +32,27 @@ const reset = document.getElementById('reset');
             costoHora.append (costoAgr);
         });
 
+//Tiempo total proyecto
+const totalHoras = document.querySelector("#totalHoras");
+console.log(totalHoras.innerHTML)
+
+//Costo total proyecto
+const costoTotal = document.querySelector("#costoTotal");
+
+    //Cálculo e impresión
+    botonCosto.addEventListener ("click", () => {
+
+        let calcCostoTotal = totalHoras.innerHTML * costoHora.value;
+        console.log(calcCostoTotal);
+
+        let costoTotAgr = document.createElement ("p");
+        costoTotAgr.innerHTML = "$" + calcCostoTotal;
+        costoTotal.append (costoTotAgr);
+    });
+
+
+
+
 
 //Costo por hora calculado
 const agregarSalario = document.getElementById('agregarSalario');
@@ -43,11 +64,11 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
         
         //Sueldo pretendido mensual / días laborables = costo diario
         let costoDiario = agregarSalario.value / 22;
-        console.log = (costoDiario)
+        console.log(costoDiario);
 
         //Costo diario / jornada la boral estandar = costo por hora
         let costoxHora = costoDiario / 8;
-        console.log = ("El costo por hora es: " + "$" +  costoxHora);
+        console.log("El costo por hora es: " + "$" +  costoxHora);
 
         costoHoraCalculado.innerText = costoxHora;
     });
@@ -66,20 +87,17 @@ function proyecto (nombre, tiempoTrabajado, costoxHora, costoProyecto) {
 
 //Nuevos proyectos
 const proyecto1 = new proyecto ("Nombre del Proyecto", "10hs", "$500", "$1000");
-console.log (proyecto1);
+console.log(proyecto1);
 
     //Agregar dato a nuevo proyecto
     let descripcion = "Esto es una descripción";
     proyecto1.descripcion = descripcion;
-    console.log (proyecto1);
+    console.log(proyecto1);
 
 const proyecto2 = ["Nombre del Proyecto", "10hs", "$500", "$1000"];
-console.log (proyecto2);
+console.log(proyecto2);
 
     //Agregar dato nuevo
     proyecto2.push (descripcion);
 
 
-//Cálculo costo total del proyecto
-const costoTotal = 10 * costoHora;
-console.log = ("El costo Total del proyecto es: " + "$" + costoTotal);
