@@ -30,11 +30,19 @@ const reset = document.getElementById('reset');
             let costoAgr = document.createElement ("p");
             costoAgr.innerHTML = "$" + agregarCosto.value;
             costoHora.append (costoAgr);
+
+            //Costo por minuto de proyecto
+            let costoMinuto = agregarCosto.value / 60;
+            console.log(costoMinuto);
+
+            let costoMinRed = Math.round(costoMinuto);
+            console.log(costoMinRed);
         });
+
+
 
 //Tiempo total proyecto
 const totalHoras = document.querySelector("#totalHoras");
-console.log(totalHoras.innerHTML)
 
 //Costo total proyecto
 const costoTotal = document.querySelector("#costoTotal");
@@ -42,7 +50,7 @@ const costoTotal = document.querySelector("#costoTotal");
     //Cálculo e impresión
     botonCosto.addEventListener ("click", () => {
 
-        let calcCostoTotal = totalHoras.innerHTML * costoHora.value;
+        let calcCostoTotal = totalHoras.innerHTML * agregarCosto.value;
         console.log(calcCostoTotal);
 
         let costoTotAgr = document.createElement ("p");
@@ -68,9 +76,12 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
 
         //Costo diario / jornada la boral estandar = costo por hora
         let costoxHora = costoDiario / 8;
-        console.log("El costo por hora es: " + "$" +  costoxHora);
+        console.log(costoxHora);
+        
+        let costoHoraRed = Math.round(costoxHora);
+        console.log(costoHoraRed);
 
-        costoHoraCalculado.innerText = costoxHora;
+        costoHoraCalculado.innerText = "$" + costoHoraRed;
     });
 
 
