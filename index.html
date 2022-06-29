@@ -15,25 +15,31 @@
 
 <body>
     <header>
-        <h1>
+        <h1 class="titulo">
             Taskmaster
         </h1>
     </header>
 
-    <section>
-        <h2 id="cronometro" class="cronometro">00:00:00</h2>
-
-        <div class="buttons">
-            <button id="start"> Start </button>
-            <button id="pausa"> Pause </button>
-            <button id="reset"> Reset </button>
+    <section class="cronometro-caja">
+        <div class="stopwatch">
+            <h2 id="cronometro" class="stopwatch-numero">
+                00,00,00
+            </h2>
+        </div>
+        
+        <div class="botones">
+            <button id="start" class="boton-cronometro"> <i class="bi bi-play-fill" style="font-size: 2rem;"></i> </button>
+            <button id="pausa" class="boton-cronometro"> <i class="bi bi-pause" style="font-size: 2rem;"></i> </button>
+            <button id="reset" class="boton-cronometro"> <i class="bi bi-arrow-clockwise" style="font-size: 2rem;"></i> </button>
         </div>
 
-        <input type="submit" id="sumar" value="Sumar tiempo">
+        <div>
+            <input class="boton-sumar" type="submit" id="sumar" value="Sumar tiempo">
+        </div>
     </section>
 
-    <section>
-        <div class="agregarProyecto">
+    <section class="agregar">
+        <div class="agregar-Proyectos">
             <h4>
                 Agregar Proyecto
             </h4>
@@ -41,21 +47,21 @@
             <input type="button"id="botonProyecto" value="Agregar">
         </div>
 
-        <div class="agregarCostohora">
+        <div class="agregar-Costohora">
             <h4>
                 Agregar tu Costo x Hora
-            </h4>
-            <p>
-                Si no conocés tu costo por hora, podés calcularlo haciendo click <a href="#">aquí</a>
-            </p>
-            
+            </h4>          
             <input type="number" id="agregarCosto">
             <input type="button" value="Agregar" id="botonCosto">
+
+            <p>
+                Si no conocés tu costo por hora, podés calcularlo haciendo click <a href="#titCalcSalario">aquí</a>
+            </p>
         </div>
     </section>
 
-    <section>
-        <div>
+    <section class="tablaProyectos">
+        <div class="columna">
             <h4>
                 Proyecto
             </h4>
@@ -63,9 +69,7 @@
             <div id="nomProyecto"></div>
         </div>
 
-        <div>-</div>
-
-        <div>
+        <div class="columna">
             <h4>
                 Tiempo invertido
             </h4>
@@ -75,9 +79,7 @@
             </div>
         </div>
 
-        <div>-</div>
-
-        <div>
+        <div class="columna">
             <h4>
                 Costo x hora
             </h4>
@@ -87,9 +89,7 @@
             </div>
         </div>
 
-        <div>-</div>
-
-        <div>
+        <div class="columna">
             <h4>
                 Costo total
             </h4>
@@ -99,9 +99,9 @@
     </section>
 
 
-    <section>
+    <section class="calcSalario">
         <div>
-            <h4>Ingresá tu salario/honorarios mensual pretendido</h4>
+            <h4 id="titCalcSalario">Ingresá tu salario/honorarios mensual pretendido</h4>
             <i>(sin el signo $)</i>
             <p>Teniendo en cuenta una jornada laboral de 8 hs diarias</p>
             <input type="number" id="agregarSalario">

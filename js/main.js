@@ -1,14 +1,20 @@
 //Cronómetro
-const start = document.getElementById('start');
-const pause = document.getElementById('pause');
-const reset = document.getElementById('reset');
+const start = document.getElementById("start");
+const pause = document.getElementById("pause");
+const reset = document.getElementById("reset");
+const sumar = document.getElementById("sumar");
+
+let sec = 0;
+let min = 0;
+let hs = 0;
+
 
 
 //Ingreso de datos
     //Nombre del proyecto
-    const agregarProyecto = document.querySelector("#agregarProyecto");
-    const botonProyecto = document.querySelector("#botonProyecto");
-    const nomProyecto = document.querySelector("#nomProyecto");
+    const agregarProyecto = document.getElementById("agregarProyecto");
+    const botonProyecto = document.getElementById("botonProyecto");
+    const nomProyecto = document.getElementById("nomProyecto");
 
         //Agregar un nombre de proyecto nuevo
         botonProyecto.addEventListener ("click", () => {
@@ -85,6 +91,27 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
     });
 
 
+//Almacenamiento de datos
+function guardarProyecto () {
+    localStorage.setItem ("Nombre proyecto", agregarProyecto.value);
+};
+
+function guardarCosto () {
+    localStorage.setItem ("Costo x hora", agregarCosto.value);
+};
+
+    //Listeners
+    botonProyecto.addEventListener ("click", guardarProyecto);
+    botonCosto.addEventListener ("click", guardarCosto);
+
+    //Recupero de datos
+    let proyectoLS = JSON.stringify (localStorage.getItem ("Nombre proyecto"));
+
+    function recuperarDatos () {
+        if (proyectoLS) {
+            //Aqui no sé como resolverlo
+        }
+    };
 
 
 
@@ -94,7 +121,7 @@ function proyecto (nombre, tiempoTrabajado, costoxHora, costoProyecto) {
     this.tiempoTrabajado = tiempoTrabajado;
     this.costoxHora = costoxHora;
     this.costoProyecto = costoProyecto;
-}
+};
 
 //Nuevos proyectos
 const proyecto1 = new proyecto ("Nombre del Proyecto", "10hs", "$500", "$1000");
@@ -110,5 +137,3 @@ console.log(proyecto2);
 
     //Agregar dato nuevo
     proyecto2.push (descripcion);
-
-
