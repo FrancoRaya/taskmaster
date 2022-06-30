@@ -21,20 +21,18 @@
     </header>
 
     <section class="cronometro-caja">
-        <div class="stopwatch">
-            <h2 id="cronometro" class="stopwatch-numero">
-                00,00,00
-            </h2>
-        </div>
-        
-        <div class="botones">
-            <button id="start" class="boton-cronometro"> <i class="bi bi-play-fill" style="font-size: 2rem;"></i> </button>
-            <button id="pausa" class="boton-cronometro"> <i class="bi bi-pause" style="font-size: 2rem;"></i> </button>
-            <button id="reset" class="boton-cronometro"> <i class="bi bi-arrow-clockwise" style="font-size: 2rem;"></i> </button>
-        </div>
+        <div class="circle">
+            <div id="stopwatch" class="stopwatch">00:00</div>
+            <div class="buttons">
+                <div class="stop" onclick="stop()">
+                    <i class="bi bi-arrow-clockwise" style="font-size: 2rem;"></i>
+                </div>
+                <div id="play-pause" class="paused" onclick="playPause()"></div>
+            </div>
 
-        <div>
-            <input class="boton-sumar" type="submit" id="sumar" value="Sumar tiempo">
+            <div>
+                <input class="boton-sumar" type="button" id="sumarTiempo" value="Sumar tiempo">
+            </div>
         </div>
     </section>
 

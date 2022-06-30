@@ -23,26 +23,48 @@ body {
     align-items: center;
 }
 
-.stopwatch {
+.circle {
+    border-radius: 50%;
+    width: 15rem;
+    height: 15rem;
+    border: 2px solid black;
+    color: black;
+    margin: 50px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+    flex-direction: column;
 }
 
-.stopwatch-numero {
-    font-size: 2.5rem;
+.stopwatch {
+    font-size: 2rem;
 }
 
-.botones {
-    padding: 20px;
+.buttons {
+    margin-top: 10px;
+    display: inline-flex;
 }
 
-.boton-cronometro {
-    margin: 0 5px;
+.paused {
+    margin: 10px;
+    height: 30px;
+    border-width: 15px 0 15px 22px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-color: transparent transparent transparent black;
+    transition: 100ms all ease;
+    will-change: border-width;
+    border-style: solid;
+}
+
+.running {
+    border-style: double;
+    border-width: 0 0 0 17px;
+}
+
+.stop {
+    margin: 10px;
+    cursor: pointer;
 }
 
 .boton-sumar {

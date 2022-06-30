@@ -1,12 +1,51 @@
 //Cronómetro
-const start = document.getElementById("start");
-const pause = document.getElementById("pause");
-const reset = document.getElementById("reset");
-const sumar = document.getElementById("sumar");
+const stopwatch = document.getElementById('stopwatch');
+const playPauseButton = document.getElementById('play-pause');
+const sumarTiempo = document.getElementById('sumarTiempo');
 
-let sec = 0;
-let min = 0;
-let hs = 0;
+let stopwatchInterval;
+let runningTime = 0;
+
+const playPause = () => {
+    const isPaused = !playPauseButton.classList.contains('running');
+    if (isPaused) {
+        playPauseButton.classList.add('running');
+        start();
+    } else {
+        playPauseButton.classList.remove('running');
+        pause();
+    }
+}
+
+const pause = () => {
+    clearInterval(stopwatchInterval);
+}
+
+const stop = () => {
+    playPauseButton.classList.remove('running');
+    runningTime = 0;
+    clearInterval(stopwatchInterval);
+    stopwatch.textContent = '00:00';
+}
+
+const start = () => {
+    let startTime = Date.now() - runningTime;
+
+    stopwatchInterval = setInterval( () => {
+        runningTime = Date.now() - startTime;
+        stopwatch.textContent = calculateTime(runningTime);
+    }, 1000)
+}
+
+const calculateTime = runningTime => {
+    const total_seconds = Math.floor(runningTime / 1000);
+    const total_minutes = Math.floor(total_seconds / 60);
+
+    const display_seconds = (total_seconds % 60).toString().padStart(2, "0");
+    const display_minutes = total_minutes.toString().padStart(2, "0");
+
+    return `${display_minutes}:${display_seconds}`
+}
 
 
 
@@ -93,7 +132,7 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
 
 //Almacenamiento de datos
 function guardarProyecto () {
-    localStorage.setItem ("Nombre proyecto", JSON.stringify(agregarProyecto.value));
+    localStorage.setItem ("Nombre proyecto", agregarProyecto.value);
 };
 
 function guardarCosto () {
@@ -105,7 +144,8 @@ function guardarCosto () {
     botonCosto.addEventListener ("click", guardarCosto);
 
     //Recupero de datos
-    let proyectoLS = JSON.parse(localStorage.getItem ("Nombre proyecto"));
+    let proyectoLS = localStorage.getItem ("Nombre proyecto");
+    console.log(proyectoLS)
 
     function recuperarDatos () {
         if (proyectoLS) {
@@ -116,26 +156,3 @@ function guardarCosto () {
     };
 
 
-
-//Función constructora: proyecto
-function proyecto (nombre, tiempoTrabajado, costoxHora, costoProyecto) {
-    this.nombre = nombre;
-    this.tiempoTrabajado = tiempoTrabajado;
-    this.costoxHora = costoxHora;
-    this.costoProyecto = costoProyecto;
-};
-
-//Nuevos proyectos
-const proyecto1 = new proyecto ("Nombre del Proyecto", "10hs", "$500", "$1000");
-console.log(proyecto1);
-
-    //Agregar dato a nuevo proyecto
-    let descripcion = "Esto es una descripción";
-    proyecto1.descripcion = descripcion;
-    console.log(proyecto1);
-
-const proyecto2 = ["Nombre del Proyecto", "10hs", "$500", "$1000"];
-console.log(proyecto2);
-
-    //Agregar dato nuevo
-    proyecto2.push (descripcion);
