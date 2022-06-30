@@ -53,7 +53,7 @@ const totalHoras = document.querySelector("#totalHoras");
 //Costo total proyecto
 const costoTotal = document.querySelector("#costoTotal");
 
-    //Cálculo e impresión
+    //Cálculo
     botonCosto.addEventListener ("click", () => {
 
         let calcCostoTotal = totalHoras.innerHTML * agregarCosto.value;
@@ -93,7 +93,7 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
 
 //Almacenamiento de datos
 function guardarProyecto () {
-    localStorage.setItem ("Nombre proyecto", agregarProyecto.value);
+    localStorage.setItem ("Nombre proyecto", JSON.stringify(agregarProyecto.value));
 };
 
 function guardarCosto () {
@@ -105,12 +105,14 @@ function guardarCosto () {
     botonCosto.addEventListener ("click", guardarCosto);
 
     //Recupero de datos
-    let proyectoLS = JSON.stringify (localStorage.getItem ("Nombre proyecto"));
+    let proyectoLS = JSON.parse(localStorage.getItem ("Nombre proyecto"));
 
     function recuperarDatos () {
         if (proyectoLS) {
-            //Aqui no sé como resolverlo
-        }
+            let recProyecto = document.createElement("p");
+            recProyecto.innerHTML = proyectoLS;
+            nomProyecto.append (recProyecto);
+        } 
     };
 
 
