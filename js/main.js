@@ -61,6 +61,9 @@ const calculateTime = runningTime => {
             let proyectoAgr = document.createElement ("p");
             proyectoAgr.innerHTML = agregarProyecto.value;
             nomProyecto.append (proyectoAgr);
+
+            //Si hace click sin agregar nada
+            agregarProyecto.value === "" && alert("Debes agregar un proyecto");
         });
     
 
@@ -156,3 +159,20 @@ function guardarCosto () {
     };
 
 
+//Desestructuración
+let proyectoUser = {
+    nombreProyecto: agregarProyecto.value,
+    costoHoraProyecto: agregarCosto.value,
+};
+
+let {nombreProyecto, costoHoraProyecto} = proyectoUser;
+
+console.log(nomProyecto);
+
+//Spread
+let proyectoUser1 = {
+    ...proyectoUser,
+    costoTotalProyecto: costoTotal.value
+}
+
+console.log(proyectoUser1);

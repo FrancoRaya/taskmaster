@@ -42,8 +42,9 @@ body {
 }
 
 .stopwatch {
-    color: #F2F2F2;
+    color: #262626;
     font-size: 2.3rem;
+    font-weight: 500;
 }
 
 .buttons {
