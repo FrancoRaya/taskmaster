@@ -148,6 +148,26 @@ body {
 .botonAgregar:active {
     border: none;
 }
+/* Alerta en caso de no agregar nada */
+.swal2-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5em !important;
+    font-weight: 600 !important;
+    color: #262626 !important;
+}
+
+.swal2-styled.swal2-confirm {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600 !important; 
+    background-color: #F24405 !important;
+    border: 2px solid #F24405 !important;
+    border-radius: 3px !important;
+}
+
+.swal2-styled:hover {
+    color: #F24405 !important;
+    background-color: white !important;
+}
 
 /* Tabla de proyectos */
 .tablaProyectos {

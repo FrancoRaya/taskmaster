@@ -63,7 +63,7 @@ const calculateTime = runningTime => {
             nomProyecto.append (proyectoAgr);
 
             //Si hace click sin agregar nada
-            agregarProyecto.value === "" && alert("Debes agregar un proyecto");
+            agregarProyecto.value === "" && Swal.fire('Tenés que agregar un proyecto');
         });
     
 
@@ -85,6 +85,8 @@ const calculateTime = runningTime => {
 
             let costoMinRed = Math.round(costoMinuto);
             console.log(costoMinRed);
+
+            agregarCosto.value === "" && Swal.fire('Tenés que agregar tu costo por hora');
         });
 
 
