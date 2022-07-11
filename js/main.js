@@ -86,6 +86,7 @@ const calculateTime = runningTime => {
             let costoMinRed = Math.round(costoMinuto);
             console.log(costoMinRed);
 
+            //Si hace click sin agregar nada
             agregarCosto.value === "" && Swal.fire('Tenés que agregar tu costo por hora');
         });
 
@@ -132,49 +133,68 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
         console.log(costoHoraRed);
 
         costoHoraCalculado.innerText = "$" + costoHoraRed;
+
+        //Si hace click sin agregar nada
+        agregarSalario.value === "" && Swal.fire('Tenés que agregar tu sueldo pretendido');
     });
 
 
 //Almacenamiento de datos
-function guardarProyecto () {
-    localStorage.setItem ("Nombre proyecto", agregarProyecto.value);
-};
+const tasks = JSON.parse(localStorage.getItem('Nombre proyecto')) || [];
 
-function guardarCosto () {
+/* function guardarProyecto () {
+    localStorage.setItem ("Nombre proyecto", JSON.stringify(agregarProyecto.value));
+}; */
+
+/* function guardarCosto () {
     localStorage.setItem ("Costo x hora", agregarCosto.value);
-};
+}; */
 
     //Listeners
-    botonProyecto.addEventListener ("click", guardarProyecto);
-    botonCosto.addEventListener ("click", guardarCosto);
-
-    //Recupero de datos
-    let proyectoLS = localStorage.getItem ("Nombre proyecto");
-    console.log(proyectoLS)
-
-    function recuperarDatos () {
-        if (proyectoLS) {
-            let recProyecto = document.createElement("p");
-            recProyecto.innerHTML = proyectoLS;
-            nomProyecto.append (recProyecto);
-        } 
-    };
+/*     botonProyecto.addEventListener ("click", guardarProyecto); */
+/*     botonCosto.addEventListener ("click", guardarCosto); */
 
 
-//Desestructuración
-let proyectoUser = {
-    nombreProyecto: agregarProyecto.value,
-    costoHoraProyecto: agregarCosto.value,
-};
+//Copié el código para poder revisarlo en detalle y ver qué debía hacer. Todavía no lo resuelvo
+function addTask(e) {
+	e.preventDefault();
+	//Selecciono el valor del input name ="task"
+	const text = agregarProyecto.value;
+	// 	Creo un objeto con el texto de la tarea y un valor booleano para saber si si esta hecha o no.
+	const task = {
+		text,
+		done: false
+	}
 
-let {nombreProyecto, costoHoraProyecto} = proyectoUser;
-
-console.log(nomProyecto);
-
-//Spread
-let proyectoUser1 = {
-    ...proyectoUser,
-    costoTotalProyecto: costoTotal.value
+	// 	Pasa por parametros a la función el array de tareas y el innerHTML
+	populateList(tasks, nomProyecto);
+	console.log(tasks) // Devuelve el array de objetos
+	console.log(nomProyecto) //Devuelve el innerHTML del contenedor
+	
+	localStorage.setItem('tasks',JSON.stringify(tasks));
+/* 	addButton.checked = false;
+	this.reset(); */
 }
 
-console.log(proyectoUser1);
+function populateList(tasks = [], taskList) {
+	//Utiliza un MAP para mostrar todas las tareas
+	taskList.innerHTML = tasks.map((task, i) => {
+		// Esto es lo que se renderiza
+		return `
+			<li class="task">
+				<input type="checkbox" class="checkbox" data-index="task${i}" id="task${i}" ${task.done ? 'checked' : ''} />
+				<label class="label" for="task${i}">
+					<span></span>${task.text}<button></button>
+				</label>
+			</li>
+		`;
+		//Con el metodo join, suma todas las tareas!
+	}).join('');
+}
+
+addTasks.addEventListener('submit', addTask);
+tasksList.addEventListener('click', toggleDone);
+populateList(tasks, tasksList);
+
+
+

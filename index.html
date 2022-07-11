@@ -51,7 +51,7 @@
 
         <div class="agregarProyectoCosto">
             <h4>
-                Agregar tu Costo x Hora
+                Agregar Costo x Hora
             </h4>          
             <input type="number" id="agregarCosto" class="campoAgregar">
             <input type="button" value="Agregar" id="botonCosto" class="botonAgregar">
@@ -114,7 +114,61 @@
         </div>
     </section>
 
+    <section>
+        <h3>¿Sugerencias?</h3>
+        <p>Envianos tus sugerencias para seguir mejorando</p>
+
+        <form id="form">
+            <div class="field">
+                <label for="userName">Nombre</label>
+                <input type="text" name="userName" id="userName">
+            </div>
+
+            <div class="field">
+                <label for="userEmail">Email</label>
+                <input type="text" name="userEmail" id="userEmail">
+            </div>
+
+            <div class="field">
+                <label for="userMessage">Mensaje</label>
+                <textarea type="text" rows="3" name="userMessage" id="userMessage"></textarea>
+            </div>
+
+            <input type="submit" id="button" value="Enviar" >
+        </form>
+
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+        <script type="text/javascript">
+            emailjs.init('user_8TqOqNni0TtnCMnxmWxQV')
+        </script>
+    </section>
+
     <!-- JS -->
+    <script>
+        const btn = document.getElementById('button');
+
+        document.getElementById('form')
+        .addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            btn.value = 'Enviando';
+
+            const serviceID = 'default_service';
+            const templateID = 'template_srepl2b';
+
+            emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                btn.value = 'Enviar';
+                Swal.fire('Mensaje enviado');
+            }, (err) => {
+                btn.value = 'Enviar';
+                Swal.fire(JSON.stringify(err));
+            });
+        });
+    </script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
