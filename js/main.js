@@ -1,52 +1,71 @@
 //Cronómetro
-const stopwatch = document.getElementById('stopwatch');
-const playPauseButton = document.getElementById('play-pause');
-const sumarTiempo = document.getElementById('sumarTiempo');
+const stopwatch = document.getElementById("stopwatch");
+const playPauseButton = document.getElementById("play-pause");
+const sumarTiempo = document.getElementById("sumarTiempo");
 
 let stopwatchInterval;
 let runningTime = 0;
+let marca = [];
 
-const playPause = () => {
-    const isPaused = !playPauseButton.classList.contains('running');
-    if (isPaused) {
-        playPauseButton.classList.add('running');
-        start();
-    } else {
-        playPauseButton.classList.remove('running');
-        pause();
+    //Iniciar-pausar
+        const playPause = () => {
+            const isPaused = !playPauseButton.classList.contains('running');
+            if (isPaused) {
+                playPauseButton.classList.add('running');
+                start();
+            } else {
+                playPauseButton.classList.remove('running');
+                pause();
+            }
+        }
+
+    //Pausar
+    const pause = () => {
+        clearInterval(stopwatchInterval);
     }
-}
 
-const pause = () => {
-    clearInterval(stopwatchInterval);
-}
+    //Parar
+    const stop = () => {
+        playPauseButton.classList.remove('running');
+        runningTime = 0;
+        clearInterval(stopwatchInterval);
+        stopwatch.textContent = '00:00';
+    }
 
-const stop = () => {
-    playPauseButton.classList.remove('running');
-    runningTime = 0;
-    clearInterval(stopwatchInterval);
-    stopwatch.textContent = '00:00';
-}
+    //Iniciar
+    const start = () => {
+        let startTime = Date.now() - runningTime;
 
-const start = () => {
-    let startTime = Date.now() - runningTime;
+        stopwatchInterval = setInterval( () => {
+            runningTime = Date.now() - startTime;
+            stopwatch.textContent = calculateTime(runningTime);
+        }, 1000);
+    };
 
-    stopwatchInterval = setInterval( () => {
-        runningTime = Date.now() - startTime;
-        stopwatch.textContent = calculateTime(runningTime);
-    }, 1000)
-}
+    //Cálculo del tiempo
+    const calculateTime = runningTime => {
+        const total_seconds = Math.floor(runningTime / 1000);
+        const total_minutes = Math.floor(total_seconds / 60);
 
-const calculateTime = runningTime => {
-    const total_seconds = Math.floor(runningTime / 1000);
-    const total_minutes = Math.floor(total_seconds / 60);
+        const display_seconds = (total_seconds % 60).toString().padStart(2, "0");
+        const display_minutes = total_minutes.toString().padStart(2, "0");
 
-    const display_seconds = (total_seconds % 60).toString().padStart(2, "0");
-    const display_minutes = total_minutes.toString().padStart(2, "0");
+        return `${display_minutes}:${display_seconds}`;
+    };
 
-    return `${display_minutes}:${display_seconds}`
-}
+    // Sumar tiempo al proyecto
+    const totalHoras = document.getElementById("totalHoras");
 
+    sumarTiempo.addEventListener ("click", () => {
+        let tiempoAct = stopwatch.innerHTML;
+        totalHoras.innerText = tiempoAct;
+
+        //Guardo el tiempo en el local storage
+        localStorage.setItem ("Tiempo invertido", tiempoAct);
+
+        //Llamo a la función que multiplica el tiempo x el costo por hora
+        calcCostoTot();
+    });
 
 
 //Ingreso de datos
@@ -72,9 +91,9 @@ const calculateTime = runningTime => {
 
 
     //Costo por hora
-    const agregarCosto = document.getElementById('agregarCosto');
-    const botonCosto = document.getElementById('botonCosto');
-    const costoHora = document.getElementById('costoHora');
+    const agregarCosto = document.getElementById("agregarCosto");
+    const botonCosto = document.getElementById("botonCosto");
+    const costoHora = document.getElementById("costoHora");
 
         //Agregar costo x hora nuevo
         botonCosto.addEventListener ("click", () => {
@@ -88,8 +107,6 @@ const calculateTime = runningTime => {
 
             //Costo por minuto de proyecto
             let costoMinuto = agregarCosto.value / 60;
-            console.log(costoMinuto);
-
             let costoMinRed = Math.round(costoMinuto);
             console.log(costoMinRed);
 
@@ -98,45 +115,42 @@ const calculateTime = runningTime => {
         });
 
 
-
-//Tiempo total proyecto
-const totalHoras = document.querySelector("#totalHoras");
-
 //Costo total proyecto
-const costoTotal = document.querySelector("#costoTotal");
+const costoTotal = document.getElementById("costoTotal");
 
-    //Cálculo
-    botonCosto.addEventListener ("click", () => {
-
-        let calcCostoTotal = totalHoras.innerHTML * agregarCosto.value;
-        console.log(calcCostoTotal);
+    function calcCostoTot() {
+        let calTot = totalHoras.innerHTML * agregarCosto.value;
+        console.log(calTot);
 
         let costoTotAgr = document.createElement ("p");
-        costoTotAgr.innerHTML = "$" + calcCostoTotal;
+        costoTotAgr.innerHTML = "$" + calTot;
         costoTotal.append (costoTotAgr);
-    });
+    }
 
 
 
 //Recuperar datos del proyecto
 let nomProyectoLS = localStorage.getItem("Nombre proyecto");
 let costoHoraLS = localStorage.getItem("Costo x hora");
+let tiempoInvertidoLS = localStorage.getItem("Tiempo invertido");
 
     //Pasando los datos al DOM
-    if (nomProyectoLS == null) {
-        nomProyecto = [];
-    } else nomProyecto.append (nomProyectoLS);
+    function datosDOM (datoGuardado, insertarText) {
+        if (datoGuardado == null) {
+            insertarText = [];
+        } else insertarText.append (datoGuardado);
+    };
 
-    if (costoHoraLS == null) {
-        nomProyecto = [];
-    } else costoHora.append (costoHoraLS);
+    datosDOM (nomProyectoLS, nomProyecto);
+    datosDOM (costoHoraLS, costoHora);
+    datosDOM (tiempoInvertidoLS, totalHoras);
 
 
 
 //Costo por hora calculado
-const agregarSalario = document.getElementById('agregarSalario');
-const botonSalario = document.getElementById('botonSalario');
-const costoHoraCalculado = document.getElementById('costoHoraCalculado');
+const agregarSalario = document.getElementById("agregarSalario");
+const botonSalario = document.getElementById("botonSalario");
+const costoHoraCalculado = document.getElementById("costoHoraCalculado");
 
     //Cálculo
     botonSalario.addEventListener ("click", () => {
@@ -157,6 +171,7 @@ const costoHoraCalculado = document.getElementById('costoHoraCalculado');
         //Si hace click sin agregar nada
         agregarSalario.value === "" && Swal.fire('Tenés que agregar tu sueldo pretendido');
     });
+
 
 
 
