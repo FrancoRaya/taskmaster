@@ -28,14 +28,8 @@
         <div class="circle">
             <div id="stopwatch" class="stopwatch">00:00</div>
             <div class="buttons">
-                <div class="stop" onclick="stop()">
-                    <i class="bi bi-arrow-clockwise" style="font-size: 2rem;"></i>
-                </div>
                 <div id="play-pause" class="paused" onclick="playPause()"></div>
-            </div>
-
-            <div>
-                <input class="botonSumar" type="button" id="sumarTiempo" value="Sumar tiempo">
+                <div id="tiempoParcial"></div>
             </div>
         </div>
     </section>
@@ -76,7 +70,11 @@
                 Tiempo invertido
             </h4>
 
-            <div id="totalHoras"></div>
+            <div>
+                <span id="totalHs"></span> : 
+                <span id="totalMin"></span> :
+                <span id="totalSeg"></span>
+            </div>
         </div>
 
         <div class="columna">
