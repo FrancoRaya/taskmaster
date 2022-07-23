@@ -55,7 +55,8 @@ body {
 .paused {
     margin: 10px;
     height: 30px;
-    border-width: 15px 0 15px 22px;
+    width: 30px;
+    border-width: 15px 0 15px 25px;
     cursor: pointer;
     box-sizing: border-box;
     border-color: transparent transparent transparent #262626;
@@ -65,29 +66,8 @@ body {
 }
 
 .running {
-    border-style: double;
-    border-width: 0 0 0 17px;
-}
-
-.stop {
-    margin: 10px;
-    cursor: pointer;
-}
-
-.botonSumar {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 500;
-    background-color: #262626;
-    color: #F24405;
-    padding: 10px 20px;
-    border: 2px solid #262626;
-    border-radius: 4px;
-}
-
-.botonSumar:hover {
-    border: 2px solid #262626;
-    background-color: #F24405;
-    color: #262626;
+    width: 15px;
+    border-width: 0 0 0 30px;
 }
 
 /* Proyectos */
