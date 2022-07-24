@@ -80,13 +80,23 @@ let marca = [];
 
             //Sumo
             let totHs = hs + hsDOM;
-            let totMinu = min + minDOM;
-            let totSegu = seg + segDOM;
+            let totMin = min + minDOM;
+            let totSeg = seg + segDOM;
+
+
+/*             if (totSeg >= 60) {
+                totSeg = 0;
+                totMin++;
+                if (totMin >= 60) {
+                    totMin = 0;
+                    totHs++
+                }
+            } */
 
             //Paso todo al DOM
             totalHs.innerText = totHs;
-            totalMin.innerText = totMinu;
-            totalSeg.innerText = totSegu;
+            totalMin.innerText = totMin;
+            totalSeg.innerText = totSeg;
 
         //De lo contrario, si los campos están vacíos, entonces imprimo los valores del cronómetro
         } else {
@@ -101,8 +111,6 @@ let marca = [];
 
         calcCostoTot();
     }
-
-
 
 
 //Ingreso de datos
@@ -205,7 +213,9 @@ const costoTotal = document.getElementById("costoTotal");
     function calcCostoTot() {
         let calcSeg;
         let calcMin;
-        let calcHs
+        let calcHs;
+        let calcTot;
+        let calcTotRed;
 
         // Calcúlo el costo total dependiendo de la fuente
         if (costoHoraLS != null && costoMinLS != null && costoSegLS != null) {
@@ -214,15 +224,23 @@ const costoTotal = document.getElementById("costoTotal");
             calcSeg = totalSeg.innerText * costoSegLS;
 
             //Cálculo total y paso al DOM
-            let calcTot = calcHs + calcSeg + calcMin;
-            let calcTotRed = Math.round (calcTot);
+            calcTot = calcHs + calcSeg + calcMin;
+            calcTotRed = Math.round (calcTot);
 
             costoTotal.innerText = "$" + calcTotRed;
+
         } else {
-            costoTotal.innerText = [];
+            calcHs = totalHs.innerText * agregarCosto.value;
+            calcMin = totalMin.innerText * costoMin;
+            calcSeg = totalSeg.innerText * costoSeg;
+
+            //Cálculo total y paso al DOM
+            calcTot = calcHs + calcSeg + calcMin;
+            calcTotRed = Math.round (calcTot);
+
+            costoTotal.innerText = "$" + calcTotRed;
         }
     }
-
 
 
 //Costo por hora calculado
