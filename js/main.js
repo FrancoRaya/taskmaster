@@ -132,6 +132,9 @@ let marca = [];
 
             //Si hace click sin agregar nada
             agregarProyecto.value === "" && Swal.fire('Tenés que agregar un proyecto');
+
+            //El input se limpia
+            agregarProyecto.value = "";
         });
 
 
@@ -163,6 +166,9 @@ let marca = [];
 
             //Si hace click sin agregar nada
             agregarCosto.value === "" && Swal.fire('Tenés que agregar tu costo por hora');
+
+            //El input se limpia
+            agregarCosto.value = "";
         });
 
 
@@ -242,6 +248,19 @@ const costoTotal = document.getElementById("costoTotal");
         }
     }
 
+//Limpiar campos
+const botonLimpiar = document.getElementById("botonLimpiar");
+
+    //Función
+    botonLimpiar.addEventListener ("click", () => {
+        nomProyecto.innerText = "";
+        totalHs.innerText = "";
+        totalMin.innerText = "";
+        totalSeg.innerText = "";
+        costoHora.innerText = "";
+        costoTotal.innerText = "";
+        localStorage.clear();
+    });
 
 //Costo por hora calculado
 const agregarSalario = document.getElementById("agregarSalario");

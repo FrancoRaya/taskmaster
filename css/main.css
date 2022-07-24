@@ -174,6 +174,26 @@ body {
     margin: 0 0 15px;
 }
 
+#botonLimpiar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #F24405;
+    border-radius: 25px;
+    background-color: #F24405;
+    color: #F2F2F2;
+    font-weight: 600;
+    width: 25px;
+    height: 25px;
+}
+
+#botonLimpiar:hover {
+    background-color: #F2F2F2;
+    box-shadow: none;
+    color: #F24405;
+    transition: 0.5s;
+}
+
 /* Cálculo de salario */
 .calcSalario {
     display: flex;
