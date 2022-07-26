@@ -55,6 +55,7 @@
         </div>
     </section>
 
+
     <section class="tablaProyectos">
         <div class="columna">
             <h4>
@@ -94,8 +95,8 @@
             <div id="costoTotal"></div>
         </div>
 
-        <div>
-            <button id="botonLimpiar">x</button>
+        <div class="botonLimpiar">
+            <button id="botonLimpiar" class="botonLimpiar">x</button>
         </div>
     </section>
 
@@ -108,12 +109,13 @@
             <input type="submit" value="Agregar" id="botonSalario" class="botonAgregar">
         </div>
 
-        <div>
-            <p id="costoHoraCalculado"></p>
+        <div id="costoHsCalc">
+            Tu costo por hora es:
+            <p id="costoHsResult" class="costoHsResult"></p>
         </div>
     </section>
 
-    <section>
+    <section class="formulario">
         <h3>¿Sugerencias?</h3>
         <p>Envianos tus sugerencias para seguir mejorando</p>
 
@@ -130,7 +132,7 @@
 
             <div class="field">
                 <label for="userMessage">Mensaje</label>
-                <textarea type="text" rows="3" name="userMessage" id="userMessage"></textarea>
+                <textarea type="text" rows="5" name="userMessage" id="userMessage"></textarea>
             </div>
         </form>
 

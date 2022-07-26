@@ -116,6 +116,7 @@ body {
     border: 2px solid #F24405;
     border-radius: 3px;
     padding: 5px 10px;
+    margin: 10px 0;
     width: fit-content;
     align-self: center;
 }
@@ -128,6 +129,8 @@ body {
 .botonAgregar:active {
     border: none;
 }
+
+
 /* Alerta en caso de no agregar nada */
 .swal2-title {
     font-family: 'Rubik', sans-serif;
@@ -149,6 +152,7 @@ body {
     background-color: white !important;
 }
 
+
 /* Tabla de proyectos */
 .tablaProyectos {
     display: flex;
@@ -163,7 +167,7 @@ body {
 
 .columna {
     text-align: center;
-    padding: 0 50px;
+    padding: 0 40px;
 }
 
 .columna h4 {
@@ -172,6 +176,11 @@ body {
     padding: 15px;
     border-bottom: 3px solid #F24405;
     margin: 0 0 15px;
+}
+
+.botonLimpiar {
+    display: flex;
+    align-self: flex-end;
 }
 
 #botonLimpiar {
@@ -185,6 +194,7 @@ body {
     font-weight: 600;
     width: 25px;
     height: 25px;
+    visibility: hidden;
 }
 
 #botonLimpiar:hover {
@@ -198,7 +208,8 @@ body {
 .calcSalario {
     display: flex;
     flex-flow: column;
-    margin: 30px;
+    padding: 50px;
+    align-items: center;
 }
 
 .calcSalarioCaja {
@@ -207,4 +218,101 @@ body {
     display: flex;
     flex-flow: column;
     align-self: center;
+}
+
+#costoHsCalc {
+    display: flex;
+    flex-flow: column;
+    border: 5px dotted #F24405;
+    width: 17rem;
+    height: 7rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+.costoHsResult {
+    margin: 10px 0;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+/* Formulario */
+.formulario {
+    padding: 50px;
+}
+
+#form {
+    padding: 30px 0 0 0;
+    align-items: center;
+}
+
+.field {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.field label {
+    margin: 10px;
+}
+
+.field input, .field textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    margin: 10px;
+    width: 18rem;
+}
+
+
+/* Ajustes Mobile */
+@media (max-width: 1024px) {
+    .tablaProyectos {
+        margin: 0 50px;
+    }
+}
+
+@media (max-width: 900px) {
+    .tablaProyectos {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+    
+    .columna h4 {
+        margin: 30px 0;
+        width: 12rem;
+    }
+
+    .calcSalarioCaja {
+        width: fit-content;
+    }
+
+    .botonLimpiar {
+        margin: 30px 0;
+        align-self: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .agregar {
+        flex-flow: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 425px) {
+    .agregarProyectoCosto {
+        width: auto;
+    }
+
+    .tablaProyectos {
+        margin: 0 30px;
+    }
+
+    .columna h4 {
+        width: 8rem;
+    }
 }

@@ -1,3 +1,8 @@
+//Función se ejecuta al cargar la pág.
+window.onload = () => {
+    btnXAparece ();
+}
+
 //Cronómetro
 const stopwatch = document.getElementById("stopwatch");
 const playPauseButton = document.getElementById("play-pause");
@@ -123,9 +128,13 @@ let marca = [];
         //Agregar un nombre de proyecto nuevo
         botonProyecto.addEventListener ("click", () => {
 
-            let proyectoAgr = document.createElement ("p");
+            //Agrego el nombre
+            nomProyecto.innerText = agregarProyecto.value;
+
+            //Código a futuro cuando para agregar más de un proyecto
+/*             let proyectoAgr = document.createElement ("p");
             proyectoAgr.innerHTML = agregarProyecto.value;
-            nomProyecto.append (proyectoAgr);
+            nomProyecto.append (proyectoAgr); */
 
             //Nombre almacenado
             localStorage.setItem ("Nombre proyecto", agregarProyecto.value);
@@ -135,6 +144,8 @@ let marca = [];
 
             //El input se limpia
             agregarProyecto.value = "";
+
+            btnXAparece ();
         });
 
 
@@ -149,9 +160,13 @@ let marca = [];
         //Agregar costo x hora y cálculo
         botonCosto.addEventListener ("click", () => {
 
-            let costoAgr = document.createElement ("p");
+            //Agrego costo x hora
+            costoHora.innerText = "$" + agregarCosto.value;
+
+            //Código a futuro cuando para agregar más de un proyecto
+/*             let costoAgr = document.createElement ("p");
             costoAgr.innerHTML = "$" + agregarCosto.value;
-            costoHora.append (costoAgr);
+            costoHora.append (costoAgr); */
 
             //Costo por minuto
             costoMin = agregarCosto.value / 60;
@@ -169,6 +184,8 @@ let marca = [];
 
             //El input se limpia
             agregarCosto.value = "";
+
+            btnXAparece ();
         });
 
 
@@ -248,10 +265,20 @@ const costoTotal = document.getElementById("costoTotal");
         }
     }
 
+
+
+
 //Limpiar campos
 const botonLimpiar = document.getElementById("botonLimpiar");
 
-    //Función
+    //Botón "x" aparece
+    function btnXAparece () {
+        if (nomProyecto.innerText != "" || totalSeg.innerText != "" || costoHora.innerText != "" || costoTotal.innerText != "") {
+            botonLimpiar.style.visibility="visible";
+        }
+    }
+
+    //Función limpiar
     botonLimpiar.addEventListener ("click", () => {
         nomProyecto.innerText = "";
         totalHs.innerText = "";
@@ -262,10 +289,14 @@ const botonLimpiar = document.getElementById("botonLimpiar");
         localStorage.clear();
     });
 
+
+
+
 //Costo por hora calculado
 const agregarSalario = document.getElementById("agregarSalario");
 const botonSalario = document.getElementById("botonSalario");
-const costoHoraCalculado = document.getElementById("costoHoraCalculado");
+const costoHsResult = document.getElementById("costoHsResult");
+const costoHsCalc = document.getElementById("costoHsCalc");
 
     //Cálculo
     botonSalario.addEventListener ("click", () => {
@@ -281,10 +312,15 @@ const costoHoraCalculado = document.getElementById("costoHoraCalculado");
         let costoHoraRed = Math.round(costoxHora);
         console.log(costoHoraRed);
 
-        costoHoraCalculado.innerText = "$" + costoHoraRed;
+        //Muestro el resultado
+        costoHsCalc.style.visibility="visible";
+        costoHsResult.innerText ="$" + costoHoraRed;
 
         //Si hace click sin agregar nada
         agregarSalario.value === "" && Swal.fire('Tenés que agregar tu sueldo pretendido');
+
+        //Limpiando campo
+        agregarSalario.value = "";
     });
 
 
