@@ -134,6 +134,8 @@
                 <label for="userMessage">Mensaje</label>
                 <textarea type="text" rows="5" name="userMessage" id="userMessage"></textarea>
             </div>
+
+            <input class="botonAgregar" type="submit" id="button" value="Enviar" >
         </form>
 
         <script type="text/javascript"
@@ -147,6 +149,9 @@
     <!-- JS -->
     <script>
         const btn = document.getElementById('button');
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userMessage = document.getElementById('userMessage');
 
         document.getElementById('form')
         .addEventListener('submit', function(event) {
@@ -160,6 +165,9 @@
             emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
                 btn.value = 'Enviar';
+                userName.value = "";
+                userEmail.value = "";
+                userMessage.value = "";
                 Swal.fire('Mensaje enviado');
             }, (err) => {
                 btn.value = 'Enviar';

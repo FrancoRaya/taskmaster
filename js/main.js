@@ -1,5 +1,6 @@
 //Función se ejecuta al cargar la pág.
 window.onload = () => {
+    calcCostoTot();
     btnXAparece ();
 }
 
@@ -25,17 +26,13 @@ let marca = [];
             }
         }
 
-    //Pausar
-    const pause = () => {
-        clearInterval(stopwatchInterval);
-    }
-
     //Parar
     const stop = () => {
         playPauseButton.classList.remove('running');
         runningTime = 0;
         clearInterval(stopwatchInterval);
         stopwatch.textContent = '00:00:00';
+        btnXAparece ();
     }
 
     //Iniciar
@@ -64,6 +61,8 @@ let marca = [];
         return `${display_hours}:${display_minutes}:${display_seconds}`;
     };
 
+
+
     // Sumar tiempo al proyecto
     const totalHs = document.getElementById("totalHs");
     const totalMin = document.getElementById("totalMin");
@@ -71,6 +70,7 @@ let marca = [];
 
     //Función
     function sumarTiempo () {
+
         //Al darle "click" parseo los valores del cronómetro para poder sumar y pregunto...
         let seg = parseInt(display_seconds);
         let min = parseInt(display_minutes);
@@ -78,6 +78,7 @@ let marca = [];
 
         //Si los campos no están vacíos, entonces, calcúlo.
         if (totalHs.innerText !="" && totalMin.innerText !="" && totalSeg.innerText !="") {
+
             //Parseo los datos de DOM
             let hsDOM = parseInt(totalHs.innerText);
             let segDOM = parseInt(totalSeg.innerText);
@@ -88,20 +89,35 @@ let marca = [];
             let totMin = min + minDOM;
             let totSeg = seg + segDOM;
 
+            //Establezco si la suma de segundos y minutos es mayor a 60
+            let difSeg;
+            let difMin;
 
-/*             if (totSeg >= 60) {
-                totSeg = 0;
+            //Si el total de segundos es mayor o igual a 60, hago una resta y paso al DOM.
+            if (totSeg >= 60) {
+                difSeg = totSeg - 60;
+                totalSeg.innerText = difSeg;
+
+                //Sumo un minuto al total y lo paso al DOM
                 totMin++;
-                if (totMin >= 60) {
-                    totMin = 0;
-                    totHs++
-                }
-            } */
+                totalMin.innerText = totMin;
 
-            //Paso todo al DOM
-            totalHs.innerText = totHs;
-            totalMin.innerText = totMin;
-            totalSeg.innerText = totSeg;
+                //Pero además, si el total de minutos es mayor o igual a 60, hago una resta y paso al DOM
+                if (totMin >= 60) {
+                    difMin = totMin - 60;
+                    totalMin.innerText = difMin;
+
+                    //Sumo una hora y lo paso al DOM
+                    totHs++;
+                    totalHs.innerText = totHs;
+                }
+
+            //Pero si nada de esto es así, entonces, solo imprimo el total de seg, min, y hs del cronómetro
+            } else {
+                totalHs.innerText = totHs;
+                totalMin.innerText = totMin;
+                totalSeg.innerText = totSeg;
+            }
 
         //De lo contrario, si los campos están vacíos, entonces imprimo los valores del cronómetro
         } else {
@@ -110,10 +126,16 @@ let marca = [];
             totalSeg.innerText = seg;
         }
 
-        localStorage.setItem ("Tiempo invertido (hs)", totalHs.innerText);
-        localStorage.setItem ("Tiempo invertido (min)", totalMin.innerText);
-        localStorage.setItem ("Tiempo invertido (seg)", totalSeg.innerText);
+        //Guardo los datos en local storage
+        let tiempoInv = {
+            horas: totalHs.innerText,
+            minutos: totalMin.innerText,
+            segundos: totalSeg.innerText
+        }
 
+        localStorage.setItem ("Tiempo invertido", JSON.stringify(tiempoInv)) ;
+
+        //Calculo el costo total del proyecto
         calcCostoTot();
     }
 
@@ -174,10 +196,14 @@ let marca = [];
             //Costo por segundo 
             costoSeg = costoMin / 60;
 
-            //Costo almacenado
-            localStorage.setItem("Costo x hora", agregarCosto.value);
-            localStorage.setItem("Costo x min", costoMin);
-            localStorage.setItem("Costo x seg", costoSeg);
+            //Guardo los datos en local storage
+            let costos = {
+                costoHs: agregarCosto.value,
+                costoMin: costoMin,
+                costoSeg: costoSeg
+            }
+            
+            localStorage.setItem ("Costos por tiempo", JSON.stringify(costos)) ;
 
             //Si hace click sin agregar nada
             agregarCosto.value === "" && Swal.fire('Tenés que agregar tu costo por hora');
@@ -192,41 +218,29 @@ let marca = [];
 
 //Recuperar datos del proyecto
 let nomProyectoLS = localStorage.getItem("Nombre proyecto");
-let tiempoInvHsLS = JSON.parse(localStorage.getItem("Tiempo invertido (hs)"));
-let tiempoInvMinLS = JSON.parse(localStorage.getItem("Tiempo invertido (min)"));
-let tiempoInvSegLS = JSON.parse(localStorage.getItem("Tiempo invertido (seg)")); 
-let costoHoraLS = JSON.parse(localStorage.getItem("Costo x hora"));
-let costoMinLS = JSON.parse(localStorage.getItem("Costo x min"));
-let costoSegLS = JSON.parse(localStorage.getItem("Costo x seg"));
+let tiempoInvLS = JSON.parse(localStorage.getItem("Tiempo invertido"));
+let costosLS = JSON.parse(localStorage.getItem("Costos por tiempo")); 
 
-    //Pasando los datos al DOM
-    function datosDOM (datoGuardado, insertarText) {
-        if (datoGuardado == null) {
-            insertarText = [];
-        } 
-        else {
-            if (datoGuardado == costoHoraLS) {
-                insertarText.append ("$" + datoGuardado);
-            } else {
-                insertarText.append (datoGuardado);
-            }
+    //Nombre
+    if (nomProyectoLS) {
+        nomProyecto.innerText = nomProyectoLS;
+    }
 
-        }
-    };
-
-    datosDOM (nomProyectoLS, nomProyecto);
-    datosDOM (costoHoraLS, costoHora);
-
-    //Pasando dato "tiempo invertido" al DOM
-    if (tiempoInvHsLS != null && tiempoInvMinLS != null && tiempoInvSegLS != null) {
-        totalHs.innerText = tiempoInvHsLS;
-        totalMin.innerText = tiempoInvMinLS;
-        totalSeg.innerText = tiempoInvSegLS;
+    //Tiempo invertido
+    if (tiempoInvLS) {
+        totalHs.innerText = tiempoInvLS.horas;
+        totalMin.innerText = tiempoInvLS.minutos;
+        totalSeg.innerText = tiempoInvLS.segundos;
     } else {
         totalHs.innerText,
         totalMin.innerText, 
         totalSeg.innerText = [];
     }
+
+    //Costos
+    if (costosLS) {
+        costoHora.innerText = "$" + costosLS.costoHs;
+    } 
 
 
 
@@ -241,37 +255,39 @@ const costoTotal = document.getElementById("costoTotal");
         let calcTotRed;
 
         // Calcúlo el costo total dependiendo de la fuente
-        if (costoHoraLS != null && costoMinLS != null && costoSegLS != null) {
-            calcHs = totalHs.innerText * costoHoraLS;
-            calcMin = totalMin.innerText * costoMinLS;
-            calcSeg = totalSeg.innerText * costoSegLS;
+        if (costosLS) {
+            calcHs = totalHs.innerText * costosLS.costoHs;
+            calcMin = totalMin.innerText * costosLS.costoMin;
+            calcSeg = totalSeg.innerText * costosLS.costoSeg;
 
             //Cálculo total y paso al DOM
             calcTot = calcHs + calcSeg + calcMin;
             calcTotRed = Math.round (calcTot);
 
             costoTotal.innerText = "$" + calcTotRed;
-
         } else {
-            calcHs = totalHs.innerText * agregarCosto.value;
-            calcMin = totalMin.innerText * costoMin;
-            calcSeg = totalSeg.innerText * costoSeg;
-
-            //Cálculo total y paso al DOM
-            calcTot = calcHs + calcSeg + calcMin;
-            calcTotRed = Math.round (calcTot);
-
-            costoTotal.innerText = "$" + calcTotRed;
+            if (agregarCosto.value, costoMin, costoSeg) {
+                calcHs = totalHs.innerText * agregarCosto.value;
+                calcMin = totalMin.innerText * costoMin;
+                calcSeg = totalSeg.innerText * costoSeg;
+    
+                //Cálculo total y paso al DOM
+                calcTot = calcHs + calcSeg + calcMin;
+                calcTotRed = Math.round (calcTot);
+    
+                costoTotal.innerText = "$" + calcTotRed;
+            } else {
+                costoTotal.innerText = "";
         }
     }
-
+};
 
 
 
 //Limpiar campos
 const botonLimpiar = document.getElementById("botonLimpiar");
 
-    //Botón "x" aparece
+    //Botón "x" aparece si hay datos
     function btnXAparece () {
         if (nomProyecto.innerText != "" || totalSeg.innerText != "" || costoHora.innerText != "" || costoTotal.innerText != "") {
             botonLimpiar.style.visibility="visible";
@@ -287,6 +303,7 @@ const botonLimpiar = document.getElementById("botonLimpiar");
         costoHora.innerText = "";
         costoTotal.innerText = "";
         localStorage.clear();
+        botonLimpiar.style.visibility="hidden";
     });
 
 
@@ -323,7 +340,4 @@ const costoHsCalc = document.getElementById("costoHsCalc");
         agregarSalario.value = "";
     });
 
-
-
-
-
+    
