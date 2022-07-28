@@ -62,11 +62,12 @@ let marca = [];
     };
 
 
+// Sumar tiempo al proyecto
+const totalHs = document.getElementById("totalHs");
+const totalMin = document.getElementById("totalMin");
+const totalSeg = document.getElementById("totalSeg");
+const tiempoInvertidoDato = document.getElementById("tiempoInvertidoDato");
 
-    // Sumar tiempo al proyecto
-    const totalHs = document.getElementById("totalHs");
-    const totalMin = document.getElementById("totalMin");
-    const totalSeg = document.getElementById("totalSeg");
 
     //Función
     function sumarTiempo () {
@@ -138,6 +139,7 @@ let marca = [];
         //Calculo el costo total del proyecto
         calcCostoTot();
     }
+
 
 
 //Ingreso de datos
@@ -339,5 +341,3 @@ const costoHsCalc = document.getElementById("costoHsCalc");
         //Limpiando campo
         agregarSalario.value = "";
     });
-
-    

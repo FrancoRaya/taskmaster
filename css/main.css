@@ -172,10 +172,24 @@ body {
 
 .columna h4 {
     color: #262626;
-    font-size: 1.2em;
+    font-size: 1.3em;
     padding: 15px;
     border-bottom: 3px solid #F24405;
     margin: 0 0 15px;
+}
+
+.tiempoInvertido {
+    display: flex;
+    justify-content: center;
+}
+
+.tiempoInvertidoDato {
+    font-style: italic;
+    margin: 0 5px;
+}
+
+.tiempoInvertido span {
+    font-style: normal;
 }
 
 .botonLimpiar {
@@ -203,6 +217,7 @@ body {
     color: #F24405;
     transition: 0.5s;
 }
+
 
 /* Cálculo de salario */
 .calcSalario {
