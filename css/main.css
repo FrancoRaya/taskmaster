@@ -12,6 +12,11 @@ body {
 }
 
 /* Header */
+.header p {
+    padding: 0 200px 50px 200px;
+    line-height: 25px;
+}
+
 .titulo {
     font-size: 3em;
     text-align: center;

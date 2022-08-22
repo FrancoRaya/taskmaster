@@ -18,10 +18,14 @@
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <h1 class="titulo">
             TaskMaster
         </h1>
+
+        <p>
+            <strong>¿Alguna vez tuviste que hacer un presupuesto de un proyecto o trabajo y no saber si al final si acertaste con el mismo al compararlo con el costo final?</strong>  Bueno, entonces, TaskMaster quizás te pueda ser de ayuda. TaskMaster es una sencilla herramienta que te permite conocer el costo total de un proyecto multiplicando tiempo invertido por tu costo por hora. 
+        </p>
     </header>
 
     <section class="cronometro-caja">
@@ -121,74 +125,12 @@
         </div>
     </section>
 
-    <section class="formulario">
+<!--     <section class="formulario">
         <h3>¿Sugerencias?</h3>
         <p>Envianos tus sugerencias para seguir mejorando</p>
-
-        <form id="form">
-            <div class="field">
-                <label for="userName">Nombre</label>
-                <input type="text" name="userName" id="userName" required>
-            </div>
-
-            <div class="field">
-                <label for="userEmail">Email</label>
-                <input type="text" name="userEmail" id="userEmail" required>
-            </div>
-
-            <div class="field">
-                <label for="userMessage">Mensaje</label>
-                <textarea type="text" rows="5" name="userMessage" id="userMessage" required></textarea>
-            </div>
-
-            <input class="botonAgregar" type="submit" id="button" value="Enviar" >
-        </form>
-
-        <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
-        <script type="text/javascript">
-            emailjs.init('user_8TqOqNni0TtnCMnxmWxQV')
-        </script>
-    </section>
+    </section> -->
 
     <!-- JS -->
-    <script>
-        const btn = document.getElementById('button');
-        const userName = document.getElementById('userName');
-        const userEmail = document.getElementById('userEmail');
-        const userMessage = document.getElementById('userMessage');
-
-        document.getElementById('form')
-        .addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            btn.value = 'Enviando';
-
-            const serviceID = 'default_service';
-            const templateID = 'template_srepl2b';
-
-            emailjs.sendForm(serviceID, templateID, this)
-            .then(() => {
-                btn.value = 'Enviar';
-                userName.value = "";
-                userEmail.value = "";
-                userMessage.value = "";
-                Swal.fire('Mensaje enviado');
-            }, (err) => {
-                btn.value = 'Enviar';
-                Swal.fire(JSON.stringify(err));
-            });
-        });
-    </script>
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-
     <script src="./js/main.js"></script>
     <!-- Fin JS -->
 </body>
