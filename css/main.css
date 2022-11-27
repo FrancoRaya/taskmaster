@@ -288,6 +288,17 @@ body {
     width: 18rem;
 }
 
+footer {
+    padding: 30px 0;
+}
+
+footer a {
+    color: #262626;
+}
+
+footer a:hover {
+    color: #F24405;
+}
 
 /* Ajustes Mobile */
 @media (max-width: 1024px) {
